@@ -1,0 +1,58 @@
+import torch
+from torch.autograd import Variable
+from matplotlib import pyplot as pl
+import numpy as np
+x_train=np.arange(1,10,0.1,dtype=np.float32).reshape([-1,1])
+y_train=np.sin(x_train)
+x_tensor=torch.Tensor(x_train)
+y_tensor=torch.Tensor(y_train)
+class NN(torch.nn.Module):
+    def  __init__(self):#输入参数：输入维度，第一层神经网络神经元个数，第二层网络神经元个数，第三层网络神经元个数,这样原因，
+        # 神经元个数就是其输出维度，所以可以作为下一层输入维度。
+        super(NN,self).__init__()
+        self.layer1=torch.nn.Sequential(torch.nn.Linear(1,100),torch.nn.Tanh())
+        self.layer2= torch.nn.Sequential(torch.nn.Linear(100,100), torch.nn.Tanh())
+        self.layer3=torch.nn.Sequential(torch.nn.Linear(100,10),torch.nn.Tanh())
+        self.layer4=torch.nn.Sequential(torch.nn.Linear(10,1))
+
+    def forward(self,x):
+        x=self.layer1(x)
+        x=self.layer2(x)
+        x=self.layer3(x)
+        x=self.layer4(x)
+        return x
+model=NN()
+x=Variable(x_tensor)
+y=Variable(y_tensor)
+# def Loss(x1,y1):
+#     z=sum((x1-y1)**2)
+#     print()
+#     return z
+Loss=torch.nn.MSELoss()  #可以自定义吧
+#Loss=torch.nn.CrossEntropyLoss(weight=None,size_average=True)
+trainer=torch.optim.Adam(model.parameters(),lr=1e-5)
+for i in range(15000):
+    #forward
+    out=model(x)
+    # Out_prob=out.data.numpy()
+    # prob=Out_prob[0]/sum(Out_prob)
+    # N=np.random.binomial(1,prob)
+    #print("N=",N)
+    loss=Loss(out,y)
+    #backward
+    #print("out-y",sum(out-y))
+    #loss=sum((out-y)**2)
+    loss=Loss(out,y)
+    trainer.zero_grad()
+    loss.backward()
+    trainer.step()
+    if (i+1)%10==0:
+        print('i={},loss={}'.format(i,loss.data[0]))
+model.eval()#!!!!!!!!!!将模型变为测试模式！！！！！！！！！！！！！！！！！！！
+x_test=np.arange(1,10,0.1).reshape(-1,1)
+predict=model(Variable(torch.FloatTensor(x_test)))
+predict=np.array(predict)#画图要转为numpy
+pl.figure(1)
+pl.plot(x_train.reshape([90,]),y_train.reshape([90,]),'r.')
+pl.plot(x_test,predict.reshape([-1,]),'g')
+pl.show()
