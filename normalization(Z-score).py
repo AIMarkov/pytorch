@@ -8,7 +8,7 @@ class LayerNorm(nn.Module):  #做一个标准化处理,使特征均值为0，标
     def __init__(self, features, eps=1e-6):
         super().__init__()
         self.gamma = nn.Parameter(torch.ones(features)) #nn.Parameter也是一种Variable#1
-        self.beta = nn.Parameter(torch.zeros(features))  #0
+        self.beta = nn.Parameter(torch.zeros(features))  #0,事实上这两个参数是用来约束特征数量的,必须和定义的一样
         self.eps = eps#这里self.eps是为了避免分母为0设置的
 
     def forward(self, x):
