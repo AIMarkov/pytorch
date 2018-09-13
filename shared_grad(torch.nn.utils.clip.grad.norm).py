@@ -42,7 +42,7 @@ Optim1.zero_grad()
 loss.backward()
 nn.utils.clip_grad_norm(Net0.parameters(),max_norm=0.1)#裁剪梯度,最大值为5
 for q,p in zip(Net1.parameters(),Net0.parameters()):
-    q.grad=p.grad
+    q._grad=p.grad
     print('grad:',p.grad)
 Optim0.step()
 Optim1.step()
