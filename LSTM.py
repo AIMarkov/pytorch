@@ -18,7 +18,7 @@ class ex_actor_lstm(nn.Module):
     def forward(self, input):
         # h0=Variable(torch.zeros(2,self.batch,200))
         # c0=Variable(torch.zeros(2,self.batch,200))默认传入的隐藏状态ｈ０和Ｃ０都是０
-        out,_=self.lstm(input)
+        out,_=self.lstm(input)#输出应该是ｈｔ和ｃｔ的序列，用ｈｔ作为结果，ｃｔ不用
         out=out[:,-1,:]#输入是序列，输出也是序列（每个时刻都有输出），这里取序列(序列长度为４)最后一个作为结果
         return self.linear(out)
 lstm=ex_actor_lstm()
