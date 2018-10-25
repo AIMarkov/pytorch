@@ -7,3 +7,19 @@ chen_ix=word_to_ix['chen']
 print(embed.weight)
 chen_ix=Variable(torch.LongTensor(chen_ix))#
 print(embed(chen_ix))
+
+
+
+
+import torch.nn as NN
+import torch
+from torch.autograd import Variable
+embeding=NN.Embedding(6,5)
+word_to_index={'中':[0],'国':[1],'我':[2],'的':[3],'母':[4],'亲':[5]}
+print(embeding.weight)
+index=Variable(torch.LongTensor(word_to_index['中']))
+print(embeding(index))
+#同理句子向量
+index=[word_to_index['中'],word_to_index['国'],word_to_index['我'],word_to_index['的'],word_to_index['母'],word_to_index['亲']]
+index=Variable(torch.LongTensor(index))
+print(embeding(index))
