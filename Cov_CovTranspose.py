@@ -7,7 +7,7 @@ import numpy as np
 pic=Image.open('test1.png')
 pic_array=np.asarray(pic)
 print('pic_array.shape:',pic_array.shape)
-pic_array_re=pic_array.reshape(1,1,280,280)
+pic_array_re=pic_array.reshape(1,1,280,280)#更据实图像来，灰度图像
 print('pic_array.shape_re:',pic_array_re.shape)
 pic_tensor=torch.Tensor(pic_array_re)
 print('pic_tensor.shape:',pic_tensor.shape)
