@@ -22,5 +22,5 @@ class ex_actor_lstm(nn.Module):
         out=out[:,-1,:]#输入是序列，输出也是序列（每个时刻都有输出），这里取序列(序列长度为４)最后一个作为结果
         return self.linear(out)
 lstm=ex_actor_lstm()
-x=Variable(torch.zeros(64,4,20))
+x=Variable(torch.zeros(64,4,20))#默认输入为（seq，batch，feature）,设置为batch_first=True，输入为（batch，seq，feature）
 lstm(x)
