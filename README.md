@@ -31,6 +31,15 @@ c_t'=tanh(W_c[h_(t-1),x_t]+b_c),注意这里[h_(t-1),x_t]表示把两个向量�
 ### 当前状态计算
 c_t=f_t。c_(t-1)+i_t。c_t',注意这里f_t,i_t都是作为权重使用，一个控制前一个状态，一个控制当前记忆。也就是cat操作。W_f是权重，b_f是偏置。注意这里“。”表示对应元素相乘，若size不一样，会做广播处理。
 ![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/current_ct.png)
+![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/duiyingcheng.png)
+![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/guangbo.png)
+### 输出门
+o_t=sigma(W_o[h_(t-1),x_t]+b_o)
+![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/out_gate.png)
+### 最终输出
+h_t=o_t。tanh(c_t)。这里也是“。”乘。所以最终结构是（注意其中箭头指向）：
+![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/2256672-7ea82e4f1ac6cd75.png)
+
 
 
 ![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/2256672-b784d887bf693253.png)
