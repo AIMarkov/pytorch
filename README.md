@@ -17,7 +17,20 @@
 # LSTM的结构
 ## 整体结构
 ![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/2256672-7ea82e4f1ac6cd75.png)
-## 每一道门的结构
+## 每一道门的结构(LSTM中每一道们实际上就是一个权重向量，在0-1之间，若是全记住就是1，若是全忘记就是0,还有就是0-1之间的值)
+### 遗忘门
+f_t=sigma(W_f[h_(t-1),x_t]+b_f),注意这里[h_(t-1),x_t]表示把两个向量连接成一个更长的向量，也就是cat操作。W_f是权重，b_f是偏置。
+![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/f_gate.png)
+### 输入门
+i_t=sigma(W_i[h_(t-1),x_t]+b_i),注意这里[h_(t-1),x_t]表示把两个向量连接成一个更长的向量，也就是cat操作。W_f是权重，b_f是偏置。
+![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/i_gate.png)
+### 当前记忆计算
+c_t'=tanh(W_c[h_(t-1),x_t]+b_c),注意这里[h_(t-1),x_t]表示把两个向量连接成一个更长的向量，也就是cat操作。W_f是权重，b_f是偏置。
+![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/current_mermory.png)
+### 前面的都是矩阵乘法
+### 当前状态计算
+c_t=f_t。c_(t-1)+i_t。c_t',注意这里f_t,i_t都是作为权重使用，一个控制前一个状态，一个控制当前记忆。也就是cat操作。W_f是权重，b_f是偏置。注意这里“。”表示对应元素相乘，若size不一样，会做广播处理。
+![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/current_ct.png)
 
 
 ![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/2256672-b784d887bf693253.png)
