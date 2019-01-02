@@ -15,5 +15,9 @@
 ### 输出W1\*H1\*D1,其中W1=(W-F)/S+1,H1=(H-F)/S+1,D1=D
 
 # LSTM的结构
+## 整体结构
 ![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/2256672-7ea82e4f1ac6cd75.png)
+## 每一道门的结构
+
+
 ![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/2256672-b784d887bf693253.png)
