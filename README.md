@@ -37,7 +37,7 @@ c_t=f_t。c_(t-1)+i_t。c_t',注意这里f_t,i_t都是作为权重使用，一�
 o_t=sigma(W_o[h_(t-1),x_t]+b_o)
 ![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/out_gate.png)
 ### 最终输出
-h_t=o_t。tanh(c_t)。这里也是“。”乘。所以最终结构是（注意其中箭头指向）：
+h_t=o_t。tanh(c_t)。所以h和c具有相同shape，这里也是“。”乘。所以最终结构是（注意其中箭头指向）：
 ![](https://github.com/AIMarkov/pytorch/raw/master/image/LSTM/2256672-7ea82e4f1ac6cd75.png)
 
 
