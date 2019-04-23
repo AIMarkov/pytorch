@@ -5,7 +5,7 @@ embed=nn.Embedding(2,5)#nn.Embeding实际上就是根据词典和词向量维度
 word_to_ix={'chen':[0],'hongming':[1],'ming':[2]}#词和词所对应的索引
 chen_ix=word_to_ix['chen']
 print(embed.weight)
-chen_ix=Variable(torch.LongTensor(chen_ix))#
+chen_ix=Variable(torch.LongTensor(chen_ix))#一定转换为LongTensor
 print(embed(chen_ix))
 
 
